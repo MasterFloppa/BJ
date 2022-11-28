@@ -10,6 +10,7 @@ public class BJ {
 	JFrame f = new JFrame();
 	public static Boolean isGameOver = false;
 	public static Boolean newGame = true;
+	private Money playerMoney = new Money(1000);
 
 	BJ() {
 		newGame = false;
@@ -72,15 +73,15 @@ public class BJ {
 
 
 		//get bet
-		int x = game.playerMoney() + 1;
-		while (x > game.playerMoney() || x <= 0) {
-			x = Integer.parseInt(JOptionPane.showInputDialog("You have " + game.playerMoney() + "\nEnter your bet"));
-			if (x > game.playerMoney() || x <= 0) {
+		int x = playerMoney.getValue() + 1;
+		while (x > playerMoney.getValue() || x <= 0) {
+			x = Integer.parseInt(JOptionPane.showInputDialog("You have " + playerMoney.getValue() + "\nEnter your bet"));
+			if (x > playerMoney.getValue() || x <= 0) {
 				JOptionPane.showMessageDialog(f, "Enter a valid amount");
 			}
 		}
-		game.playerBet(x);
-		game.updatePlayerMoney(-game.getPlayerBet());
+		game.playerBet(x, playerMoney);
+		playerMoney.updatePlayerMoney(-game.getPlayerBet());
 		/*------------------------------------ */
 
 		s = String.format("Images\\PNG-cards-1.3\\%s.png",
@@ -143,7 +144,7 @@ public class BJ {
 
 					JOptionPane.showMessageDialog(f,
 							"Your score was " + game.player.calcScore() + " and AI's score was " + game.aI.calcScore());
-					game.decideWinner();
+					game.decideWinner(playerMoney);
 					if (isGameOver) {
 						JOptionPane.showMessageDialog(f, "Game Over");
 						System.exit(0);
@@ -151,7 +152,7 @@ public class BJ {
 
 						// TODO: terminate prv loop
 						JOptionPane.showMessageDialog(f,
-								game.getWinner() + " won this round\n" + "You have " + game.playerMoney()
+								game.getWinner() + " won this round\n" + "You have " + playerMoney.getValue()
 										+ " left");
 
 						// String s = JOptionPane.showInputDialog("Do you want to play again?");
@@ -197,7 +198,7 @@ public class BJ {
 
 					JOptionPane.showMessageDialog(f,
 							"Your score was " + game.player.calcScore() + " and AI's score was " + game.aI.calcScore());
-					game.decideWinner();
+					game.decideWinner(playerMoney);
 					if (isGameOver) {
 						JOptionPane.showMessageDialog(f, "Game Over, you lost all your money.");
 						System.exit(0);
@@ -205,7 +206,7 @@ public class BJ {
 
 						// TODO: terminate prv loop
 						JOptionPane.showMessageDialog(f,
-								game.getWinner() + " won this round\n" + "You have " + game.playerMoney()
+								game.getWinner() + " won this round\n" + "You have " + playerMoney.getValue()
 										+ " left");
 
 						// String s = JOptionPane.showInputDialog("Do you want to play again?");

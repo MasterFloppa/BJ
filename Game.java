@@ -12,13 +12,23 @@ public class Game {
 
 	private int playerBet = 0;
 
-	private int playerMoney = 1000;
-
 	private int winner = 0; // 1-player 2-AI
 
 	// game constructor
 	public Game() {
 		deck.Shuffle();
+	}
+
+	/**
+	 * Game Reset
+	 */
+	public void resetGame() {
+		player = new Player();
+		aI = new AI();
+		playerScore = 0;
+		aiScore = 0;
+		playerBet = 0;
+		winner = 0;
 	}
 
 	// game loop for blackjack
@@ -49,11 +59,13 @@ public class Game {
 
 	
 	/**
-	 * set player's bet
-	 * @param bet - player's bet
+	 * set player's bet.
+	 * @param bet - player's bet.
+	 * @param money - player's money object.
 	 */
-	public void playerBet(int bet) {
+	public void playerBet(int bet, Money money) {
 		playerBet = bet;
+		money.updatePlayerMoney(-bet);
 	}
 
 	// get player's bet
@@ -78,16 +90,6 @@ public class Game {
 		return aiScore;
 	}
 
-	// get Player's Money
-	public int playerMoney() {
-		return playerMoney;
-	}
-
-	// Update Player's Money
-	public void updatePlayerMoney(int money) {
-		playerMoney += money;
-	}
-
 	// get Player's Hand
 	public Card[] playerHand() {
 		return player.hand;
@@ -98,30 +100,33 @@ public class Game {
 		return aI.hand;
 	}
 
-	// compareScores
-	public void decideWinner() {
+	/**
+	 * Compare scores to determine winner.
+	 * @param money - player's money object.
+	 */
+	public void decideWinner(Money money) {
 		aiScore = aI.calcScore();
 		playerScore = player.calcScore();
 		if ((aiScore > 21) && (playerScore > 21)) {
 			if (aiScore > playerScore) {
 				winner = 1;
-				updatePlayerMoney(getPot());
+				money.updatePlayerMoney(getPot());
 			} else {
 				winner = 2;
-				if (playerMoney == 0)
+				if (money.getValue() == 0)
 					BJ.isGameOver = true;
 			}
 		}
 
 		else if ((aiScore <= 21) && (playerScore > 21)) {
 			winner = 2;
-			if (playerMoney == 0)
+			if (money.getValue() == 0)
 				BJ.isGameOver = true;
 		}
 
 		else if ((aiScore > 21) && (playerScore <= 21)) {
 			winner = 1;
-			updatePlayerMoney(getPot());
+			money.updatePlayerMoney(getPot());
 		}
 
 		else {
@@ -130,10 +135,10 @@ public class Game {
 
 			if (a > b) {
 				winner = 1;
-				updatePlayerMoney(getPot());
+				money.updatePlayerMoney(getPot());
 			} else {
 				winner = 2;
-				if (playerMoney == 0)
+				if (money.getValue() == 0)
 					BJ.isGameOver = true;
 			}
 		}

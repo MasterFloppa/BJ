@@ -4,18 +4,6 @@ public class Player {
 	protected int score;
 	private boolean decisionIsDone = false;
 
-	private int playerMoney = 1000;
-
-	// get playerMoney
-	public int getPlayerMoney() {
-		return playerMoney;
-	}
-
-	// Update Player's Money
-	public void updatePlayerMoney(int money) {
-		playerMoney += money;
-	}
-
 	// calculate score of player's hand
 	public int calcScore() {
 		score = 0;
