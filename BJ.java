@@ -10,11 +10,12 @@ public class BJ {
 	JFrame f = new JFrame();
 	public static Boolean isGameOver = false;
 	public static Boolean newGame = true;
+	static Game game;
 	private Money playerMoney = new Money(1000);
 
 	BJ() {
 		newGame = false;
-		Game game = new Game();
+		game = new Game();
 		game.dealCards();
 		String s; // to fetch address's of images
 
@@ -222,9 +223,10 @@ public class BJ {
 	}
 
 	public static void main(String args[]) {
+		new BJ();
+
 		while (!isGameOver)
-			if (newGame) {
-				new BJ();
-			}
+			if (newGame) 
+				game.resetGame();
 	}
 }
