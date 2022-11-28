@@ -29,12 +29,7 @@ public class Game {
 		aiScore = 0;
 		playerBet = 0;
 		winner = 0;
-	}
-
-	// game loop for blackjack
-	public void play() {
-		// Deal cards to player and AI
-		dealCards();
+		
 	}
 
 	/**
@@ -60,7 +55,7 @@ public class Game {
 	
 	/**
 	 * set player's bet.
-	 * @param bet - player's bet.
+	 * @param bet - player's bet which is deducted from player's money.
 	 * @param money - player's money object.
 	 */
 	public void playerBet(int bet, Money money) {
@@ -144,9 +139,3 @@ public class Game {
 		}
 	}
 }
-/*
- * int moneyGambled=JOptionPane.showInputDialog(
- * f,"Enter the amount you want to gamble:");
- * if(moneyGambled>currentMoney)
- * throw new IllegalArgumentException("You dont have that much money");
- */

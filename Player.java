@@ -1,6 +1,6 @@
 public class Player {
 	protected Card[] hand = new Card[5];
-	protected int handSize;
+	protected int handSize = 0;
 	protected int score;
 	private boolean decisionIsDone = false;
 
