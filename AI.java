@@ -4,14 +4,6 @@ public class AI extends Player {
 	// AI's decisionIsDone
 	private boolean decisionIsDone = false;
 
-	// //AI's constructor
-	// public AI()
-	// {
-	// handSize = 2;
-	// score = 0;
-	// decisionIsDone = false;
-	// }
-
 	// AI's decisionIsDone
 	public boolean getdecisionIsDone() {
 		return decisionIsDone;

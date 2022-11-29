@@ -38,10 +38,10 @@ public class UIManager {
 			AIcl[i].setForeground(Color.WHITE);
 		}
 
-		p_Count.setBounds(945, 590, 167, 50);
+		p_Count.setBounds(945, 570, 167, 50);
 		p_Count.setFont(new FontUIResource("Town 10 Display Medium", Font.PLAIN, 20));
 		p_Count.setForeground(Color.WHITE);
-		AI_Count.setBounds(945, 105, 167, 50); // 195 139
+		AI_Count.setBounds(945, 100, 167, 50); // 195 139
 		AI_Count.setFont(new FontUIResource("Town 10 Display Medium", Font.PLAIN, 20));
 		AI_Count.setForeground(Color.WHITE);
 
@@ -77,7 +77,7 @@ public class UIManager {
 		int x = playerMoney.getValue() + 1;
 		while (x > playerMoney.getValue() || x <= 0) {
 			x = Integer
-					.parseInt(JOptionPane.showInputDialog("You have " + playerMoney.getValue() + "\nEnter your bet"));
+					.parseInt(JOptionPane.showInputDialog("You have " + playerMoney.getValue() + "$\nEnter your bet"));
 			if (x > playerMoney.getValue() || x <= 0) {
 				JOptionPane.showMessageDialog(frame, "Enter a valid amount");
 			}

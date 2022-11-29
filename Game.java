@@ -12,7 +12,7 @@ public class Game {
 
 	private int playerBet = 0;
 
-	private int winner = 0; // 1-player 2-AI
+	private int winner = 0; // 1-player 2-AI 0-draw
 
 	// game constructor
 	public Game() {
@@ -111,7 +111,8 @@ public class Game {
 			if (aiScore > playerScore) {
 				winner = 1;
 				money.updatePlayerMoney(getPot());
-			} else {
+			} 
+			else {
 				winner = 2;
 				if (money.getValue() == 0)
 					BJ.isGameOver = true;

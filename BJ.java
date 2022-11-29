@@ -19,8 +19,8 @@ public class BJ {
 	public void update() {
 		// Clear the cards
 		clearCards();
-		uiManager.AI_Count.setText("AI's Score:" + "\n???");
-		uiManager.p_Count.setText("Your Score: \n");
+		uiManager.AI_Count.setText("AI's Score: " + " ???");
+		uiManager.p_Count.setText("Your Score: ");
 
 		// Get bet
 		uiManager.getBet(game, playerMoney);
@@ -57,7 +57,7 @@ public class BJ {
 				}
 
 				/*---------Game loop termination---------- */
-				if (game.aI.getdecisionIsDone() && game.player.getdecisionIsDone()) 
+				if (game.aI.getdecisionIsDone() && game.player.getdecisionIsDone())
 					terminator();
 			}
 		});
@@ -129,20 +129,21 @@ public class BJ {
 				uiManager.AIcl[i].setIcon(cardIcon);
 			}
 		}
-		uiManager.AI_Count.setText(Integer.toString(game.aI.calcScore()));
+		uiManager.AI_Count.setText("AI's Score: \n" + game.aI.calcScore());
+
+		game.decideWinner(playerMoney);
 
 		JOptionPane.showMessageDialog(uiManager.frame,
 				"Your score was " + game.player.calcScore() + " and AI's score was " + game.aI.calcScore());
-		game.decideWinner(playerMoney);
+
+		JOptionPane.showMessageDialog(uiManager.frame,
+				game.getWinner() + " won this round\n" + "You have " + playerMoney.getValue()
+						+ "$ left");
+
 		if (isGameOver) {
-			JOptionPane.showMessageDialog(uiManager.frame, "Game Over");
+			JOptionPane.showMessageDialog(uiManager.frame, "Game Over, you have no money left.");
 			System.exit(0);
 		} else {
-
-			// TODO: terminate prv loop
-			JOptionPane.showMessageDialog(uiManager.frame,
-					game.getWinner() + " won this round\n" + "You have " + playerMoney.getValue()
-							+ " left");
 
 			int choice = JOptionPane.showConfirmDialog(uiManager.frame, "Do you want to play again?",
 					"Play again?", JOptionPane.YES_NO_OPTION);
