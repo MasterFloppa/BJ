@@ -1,8 +1,9 @@
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 import java.awt.*;
 
 public class UIManager {
-	public JFrame f = new JFrame();
+	public JFrame frame = new JFrame();
 	public String s; // to fetch address's of images
 
 	public JLabel PLcl[] = new JLabel[5]; // player card layout
@@ -10,13 +11,10 @@ public class UIManager {
 	public JButton hit = new JButton("Hit");
 	public JButton stand = new JButton("Stand");
 
-	public JLabel p_Count = new JLabel("My count"); // player card layout
-	public JLabel p_Count_txt = new JLabel("Your Score");
-	public JLabel AI_Count = new JLabel("???"); // AI card layout
-	public JLabel AI_Count_txt = new JLabel("AI's Score");
+	public JLabel p_Count = new JLabel("Your Score: ");
+	public JLabel AI_Count = new JLabel("AI's Score:" + "\n ???");
 
-	public JLabel Pile = new JLabel(); // pile of cards
-	public ImageIcon imageIcon = OnGUI.getImageIcon("card_bg_h", 195, 139, "jpg");
+	Font font = new FontUIResource("Town 10 Display Medium", Font.PLAIN, 16);
 
 	public UIManager() {
 		setBoundsLabels();
@@ -30,56 +28,58 @@ public class UIManager {
 		for (int i = 0; i < 5; i++) {
 			PLcl[i] = new JLabel("Your Card");
 			PLcl[i].setBounds(170 + (i * 149), 500, 139, 195);
+			PLcl[i].setFont(font);
+			PLcl[i].setForeground(Color.WHITE);
 		}
 		for (int i = 0; i < 5; i++) {
 			AIcl[i] = new JLabel("AI's Card");
 			AIcl[i].setBounds(170 + (i * 149), 30, 139, 195);
+			AIcl[i].setFont(font);
+			AIcl[i].setForeground(Color.WHITE);
 		}
 
-		p_Count_txt.setBounds(930, 550, 100, 50);
 		p_Count.setBounds(945, 590, 167, 50);
-		AI_Count_txt.setBounds(930, 70, 100, 50);
+		p_Count.setFont(new FontUIResource("Town 10 Display Medium", Font.PLAIN, 20));
+		p_Count.setForeground(Color.WHITE);
 		AI_Count.setBounds(945, 105, 167, 50); // 195 139
+		AI_Count.setFont(new FontUIResource("Town 10 Display Medium", Font.PLAIN, 20));
+		AI_Count.setForeground(Color.WHITE);
 
 		hit.setBounds(400, 450, 80, 30);
 		stand.setBounds(600, 450, 80, 30);
-
-		Pile.setBounds(50, 300, 195, 139);
 	}
 
 	public void initGUI() {
 		for (int i = 0; i < 5; i++) {
-			f.add(AIcl[i]);
-			f.add(PLcl[i]);
+			frame.add(AIcl[i]);
+			frame.add(PLcl[i]);
 		}
-		f.add(hit);
-		f.add(stand);
-		f.add(p_Count);
-		f.add(p_Count_txt);
-		f.add(AI_Count);
-		f.add(AI_Count_txt);
-		f.add(Pile);
+		frame.add(hit);
+		frame.add(stand);
+		frame.add(p_Count);
+		frame.add(AI_Count);
 
-		f.setSize(1100, 800);
-		f.setLayout(null);
-		f.getContentPane().setBackground(new Color(20, 153, 10));
-		f.setVisible(true);
-		f.setTitle("Black Jack");
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(1280, 800);
+		frame.setLayout(null);
+		frame.getContentPane().setBackground(new Color(20, 153, 10));
+		frame.setVisible(true);
+		frame.setTitle("Black Jack");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	/**
-	 * Get bet.
+	 * Get bet popup.
 	 * 
-	 * @param game        The game object.
-	 * @param playerMoney The player's money.
+	 * @param game        - The game object.
+	 * @param playerMoney - The player's money.
 	 */
 	public void getBet(Game game, Money playerMoney) {
 		int x = playerMoney.getValue() + 1;
 		while (x > playerMoney.getValue() || x <= 0) {
-			x = OnGUI.getBet(playerMoney);
+			x = Integer
+					.parseInt(JOptionPane.showInputDialog("You have " + playerMoney.getValue() + "\nEnter your bet"));
 			if (x > playerMoney.getValue() || x <= 0) {
-				JOptionPane.showMessageDialog(f, "Enter a valid amount");
+				JOptionPane.showMessageDialog(frame, "Enter a valid amount");
 			}
 		}
 		game.playerBet(x, playerMoney);

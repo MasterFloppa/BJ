@@ -29,7 +29,7 @@ public class Game {
 		aiScore = 0;
 		playerBet = 0;
 		winner = 0;
-		
+
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class Game {
 			return "You";
 		else if (winner == 2)
 			return "AI";
-		return null;
+		return "No one";
 	}
 
 	
@@ -102,7 +102,12 @@ public class Game {
 	public void decideWinner(Money money) {
 		aiScore = aI.calcScore();
 		playerScore = player.calcScore();
-		if ((aiScore > 21) && (playerScore > 21)) {
+		if(aiScore==playerScore)
+		{
+			winner = 0;
+			money.updatePlayerMoney(playerBet);
+		}
+		else if ((aiScore > 21) && (playerScore > 21)) {
 			if (aiScore > playerScore) {
 				winner = 1;
 				money.updatePlayerMoney(getPot());
