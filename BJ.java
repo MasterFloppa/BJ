@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-//import java.util.concurrent.TimeUnit;
-
 public class BJ {
 	private static final int Height = 195;
 	private static final int Width = 139;
