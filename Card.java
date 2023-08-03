@@ -39,7 +39,7 @@ public class Card {
 				return "jack";
 			case (12):
 				return "queen";
-			case (13): // original game has jack=queen=king=10
+			case (13): 				
 				return "king";
 		}
 		return null;

@@ -6,8 +6,12 @@ public class UIManager {
 	public JFrame frame = new JFrame();
 	public String s; // to fetch address's of images
 
-	public JLabel PLcl[] = new JLabel[5]; // player card layout
-	public JLabel AIcl[] = new JLabel[5]; // AI card layout
+	// player card layout
+	public JLabel PLcl[] = new JLabel[5]; 
+
+	// AI card layout
+	public JLabel AIcl[] = new JLabel[5]; 
+	
 	public JButton hit = new JButton("Hit");
 	public JButton stand = new JButton("Stand");
 

@@ -1,10 +1,11 @@
 public class Player {
 	protected Card[] hand = new Card[5];
 	protected int handSize = 0;
-	protected int score;
+	
 	private boolean decisionIsDone = false;
 
 	// calculate score of player's hand
+	protected int score;
 	public int calcScore() {
 		score = 0;
 		for (int i = 0; i < handSize; i++) {
@@ -13,6 +14,7 @@ public class Player {
 		return score;
 	}
 
+	// add card to player's hand
 	public void addCard(Card card) {
 		hand[handSize++] = card;
 		if (calcScore() >= 21)

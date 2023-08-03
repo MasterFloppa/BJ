@@ -1,27 +1,27 @@
-
 //Black Jack Main Game Class
 public class Game {
 	// Game Variables
 	public Deck deck = new Deck();
 
+	// Player and AI objects
 	public Player player = new Player();
 	public AI aI = new AI();
 
+	//Score counters
 	private int playerScore = 0;
 	private int aiScore = 0;
 
 	private int playerBet = 0;
 
-	private int winner = 0; // 1-player 2-AI 0-draw
+	// Winner variable
+	private int winner = 0; 		// 1-player,  2-AI,   0-draw
 
 	// game constructor
 	public Game() {
 		deck.Shuffle();
 	}
 
-	/**
-	 * Game Reset
-	 */
+	// Game Reset
 	public void resetGame() {
 		player = new Player();
 		aI = new AI();
@@ -32,15 +32,14 @@ public class Game {
 
 	}
 
-	/**
-	 * Dealing of cards to player and AI.
-	 */
+	//Dealing of initial cards to player and AI.
 	public void dealCards() {
 		player.addCard(deck.giveCard());
 		player.addCard(deck.giveCard());
 		aI.addCard(deck.giveCard());
 		aI.addCard(deck.giveCard());
 	}
+
 
 	//get winner
 	public String getWinner()
@@ -73,13 +72,13 @@ public class Game {
 		return playerBet * 2;
 	}
 
-	// get Player's Scores
+	// get Player's initial score
 	public int playerScore() {
 		playerScore = player.hand[0].getValue() + player.hand[1].getValue();
 		return playerScore;
 	}
 
-	// get AI's Scores
+	// get AI's initial score
 	public int aiScore() {
 		aiScore = aI.hand[0].getValue() + aI.hand[1].getValue();
 		return aiScore;
@@ -102,11 +101,15 @@ public class Game {
 	public void decideWinner(Money money) {
 		aiScore = aI.calcScore();
 		playerScore = player.calcScore();
+
+		// if both have same score
 		if(aiScore==playerScore)
 		{
 			winner = 0;
 			money.updatePlayerMoney(playerBet);
 		}
+
+		// if both player and AI bust (Have a total over 21)
 		else if ((aiScore > 21) && (playerScore > 21)) {
 			if (aiScore > playerScore) {
 				winner = 1;
@@ -119,25 +122,31 @@ public class Game {
 			}
 		}
 
+		// if player busts and AI doesn't
 		else if ((aiScore <= 21) && (playerScore > 21)) {
 			winner = 2;
 			if (money.getValue() == 0)
 				BJ.isGameOver = true;
 		}
 
+		// if AI busts and player doesn't
 		else if ((aiScore > 21) && (playerScore <= 21)) {
 			winner = 1;
 			money.updatePlayerMoney(getPot());
 		}
 
-		else {
+		// if neither busts
+		else 
+		{
 			int a = 21 - aiScore;
 			int b = 21 - playerScore;
 
+			// finding the closest to 21
 			if (a > b) {
 				winner = 1;
 				money.updatePlayerMoney(getPot());
-			} else {
+			} 
+			else {
 				winner = 2;
 				if (money.getValue() == 0)
 					BJ.isGameOver = true;

@@ -1,4 +1,3 @@
-
 class Deck 
 {
 	private Card[] deck;
@@ -8,9 +7,9 @@ class Deck
 	Deck() 
 	{
 		deck = new Card[52];
-		for (int i = 1; i<=4; i++) // i suit
+		for (int i = 1; i<=4; i++) 					// i-> suit
 		{
-			for (int j = 1; j < 14; j++) // j value
+			for (int j = 1; j < 14; j++) 			//-> j value
 			{
 				deck[card_number++] = new Card(i, j);
 			}
@@ -31,7 +30,7 @@ class Deck
 	public Card giveCard()
 	{
 		if(cardsUsed==52)
-			throw new IllegalArgumentException("No cards left in the deck."); //change
+			throw new IllegalArgumentException("No cards left in the deck."); 		//can be changed to start new deck
 		else
 			return deck[cardsUsed++];
 	}
